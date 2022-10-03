@@ -51,6 +51,10 @@ class MainController extends Controller
             'allGame' => $allg,]);
     }
 
+    public function login(Request $request)
+    {
+        return view('login');
+    }
 
     public function edit($id)
     {

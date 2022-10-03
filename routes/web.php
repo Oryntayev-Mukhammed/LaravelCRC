@@ -19,3 +19,4 @@ Route::get('/main', [MainController::class, 'index']);
 Route::get('/create', [MainController::class, 'create']);
 Route::post('/store', [MainController::class, 'store']);
 Route::get('/details', [MainController::class, 'details']);
+Route::get('/login', [MainController::class, 'login']);
