@@ -4,6 +4,6 @@
 
     </head>
     <body class="antialiased">
-        <img src="{{asset('/storage/back.jpg')}}" alt="Card">
+        <img src="{{asset('/storage/img/back.jpg')}}" alt="Card">
     </body>
 </html>

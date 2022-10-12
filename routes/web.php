@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -15,8 +16,16 @@ use App\Http\Controllers\MainController;
 */
 
 Route::get('/', function () {return view('welcome');});
-Route::get('/main', [MainController::class, 'index']);
+Route::get('/main', [MainController::class, 'index'])->name('main');
 Route::get('/create', [MainController::class, 'create']);
 Route::post('/store', [MainController::class, 'store']);
-Route::get('/details', [MainController::class, 'details']);
+Route::get('/details/{id}', [MainController::class, 'details']);
 Route::get('/login', [MainController::class, 'login']);
+Route::put('/update/{id}', [MainController::class, 'update']);
+Route::get('/edit/{id}', [MainController::class, 'edit']);
+Route::post('/delete/{id}', [MainController::class, 'delete']);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

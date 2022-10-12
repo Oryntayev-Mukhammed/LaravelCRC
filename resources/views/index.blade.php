@@ -7,11 +7,10 @@
 </head>
 <style>
     body {
-        background: #c7b39b url('https://www.xtrafondos.com/en/descargar.php?id=8827&resolucion=3840x2160');
+        background: #c7b39b url({{asset('/storage/img/back.jpg')}});
         background-size: cover;
         color: #fff;
     }
-
     td {
         padding: 30px;
     }
@@ -68,12 +67,12 @@
                          style="width: 200px; height: 230px; border-color: rgba(108,117,125,0.7);">
                         <img class="card-img-top"
                              style="border: 4px solid white; border-radius: 0px 0px 10px 10px; border-color: #8e8985; margin-bottom: -15px;"
-                             src="{{$game->img}}" alt="Card image cap">
+                             src="{{asset('/storage/'.$game->img)}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-text mb-0">{{$game->name}}</h5>
                             <p class="card-text text-light mb-1" style="font-size: 14pt; font-weight: bold">
                                 ${{$game->price}}</p>
-                            <form action="details" method="get">
+                            <form action="{{url('details/'.$game->id)}}" method="get">
                                 <input type="hidden" name="id" value="{{$game->id}}">
                                 <button type="submit" class="btn btn-primary">Details</button>
                             </form>
@@ -109,12 +108,12 @@
                          style="width: 200px; height: 230px; border-color: rgba(108,117,125,0.7);">
                         <img class="card-img-top"
                              style="border: 4px solid white; border-radius: 0px 0px 10px 10px; border-color: #8e8985; margin-bottom: -15px;"
-                             src="{{$game->img}}" alt="Card image cap">
+                             src="{{asset('/storage/'.$game->img)}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-text mb-0">{{$game->name}}</h5>
                             <p class="card-text text-light mb-1" style="font-size: 14pt; font-weight: bold">
                                 ${{$game->price}}</p>
-                            <form action="details" method="get">
+                            <form action="{{url('details/'.$game->id)}}" method="get">
                                 <input type="hidden" name="id" value="{{$game->id}}">
                                 <button type="submit" class="btn btn-primary">Details</button>
                             </form>
@@ -165,4 +164,3 @@
 </div>
 </body>
 </html>
-A

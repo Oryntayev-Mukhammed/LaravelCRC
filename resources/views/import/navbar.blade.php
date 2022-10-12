@@ -1,25 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-light border border-secondary border-3" style="background: rgb(52,58,64, 0.7); border-radius: 0px 0px 50px 50px;  height: 50px !important;">
-  <a class="navbar-brand text-light mb-2" style="margin-left: 40px" href="main">Hollow's Story</a>
+  <a class="navbar-brand text-light mb-2" style="margin-left: 40px" href="/main">Hollow's Story</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link text-light" href="main">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-light" href="/main">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-light" href="#">Feedback</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="create">Create</a>
+        <a class="nav-link text-light" href="/create">Create</a>
       </li>
-        <?php
-          session_start();
-          if(isset($_SESSION['auth'])){
-            if ($_SESSION['auth'] == "True") {
-
-        ?>
+        <?php $user = Auth::user(); ?>
+        @if(Auth::check())
         <li class="nav-item">
           <a href="/Exam/secondary/cart.php" class="nav-link mr-3" style="margin-left: 1450%; color: rgba(248,249,250,255);">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -28,7 +24,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-light" style="font-size: 13pt; margin-left: 1540%;"><?php echo '$', getWallet($_SESSION['name']) ?></a>
+          <a href="#" class="nav-link text-light" style="font-size: 13pt; margin-left: 1540%;"></a>
         </li>
         <li class="nav-item">
           <a href="/Exam/secondary/account.php" class="nav-link mr-3" style="margin-left: 1500%; color: rgba(248,249,250,255);">
@@ -39,17 +35,21 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/Exam/controllers/dest.php" class="nav-link mr-3" style="margin-left: 1330%; color: rgba(248,249,250,255);">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-              </svg>
-          </a>
+            <a class="nav-link mr-3" href="{{ route('logout') }}"
+               style="margin-left: 1330%; color: rgba(248,249,250,255);"
+               onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                </svg>
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </li>
-        <?php
-            }
-          }else{
-        ?>
+        @else
         <li class="nav-item">
           <a href="login" class="nav-link mr-3" style="margin-left: 1550%; color: rgba(248,249,250,255);">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
@@ -58,9 +58,7 @@
               </svg>
           </a>
         </li>
-        <?php
-          }
-        ?>
+        @endif
     </ul>
   </div>
 </nav>
