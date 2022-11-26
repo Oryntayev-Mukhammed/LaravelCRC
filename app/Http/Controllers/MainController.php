@@ -8,6 +8,7 @@ use http\Exception\BadMethodCallException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use PhpOption\None;
 
 class MainController extends Controller
 {
@@ -67,14 +68,18 @@ class MainController extends Controller
     {
         try {
             $game = Game::find($id);
-            $path = $request -> file('img')->store('img', 'public');
-            try{
-                unlink(public_path('/storage/' . $game->img));
-            }catch (Exception $e){
+            if ( $request->img != null) {
+                $path = $request->file('img')->store('img', 'public');
+                try{
+                    unlink(public_path('/storage/' . $game->img));
+                }catch (Exception $e){
+            }
 
             }
             $game->name = $request->input('name');
-            $game->img = $path;
+            if($request->img != null) {
+                $game->img = $path;
+            }
             $game->disc = $request->input('disc');
             $game->price = $request->input('price');
             $game->discount = $request->input('discount');
@@ -96,7 +101,11 @@ class MainController extends Controller
     public function delete($id)
     {
         $game = Game::find($id);
-        unlink(public_path('/storage/'.$game->img));
+        try{
+            unlink(public_path('/storage/'.$game->img));
+        }catch (Exception $e){
+            echo "Error";
+        }
         $game -> delete();
 
         return redirect()->route('main');
